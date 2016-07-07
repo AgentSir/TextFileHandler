@@ -1,0 +1,32 @@
+CREATE DATABASE text_files;
+
+USE text_files;
+
+CREATE TABLE `file_statement` (
+	`file_statement_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`file_name` VARCHAR(255) NOT NULL,
+	`file_folder` VARCHAR(255) NOT NULL,
+	`longest_word` VARCHAR(255) NULL DEFAULT NULL,
+	`smallest_word` VARCHAR(255) NULL DEFAULT NULL,
+	`length` INT(11) NULL DEFAULT NULL,
+	`average_word_length` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`file_statement_id`)
+)
+CHARSET='utf8'
+ENGINE=InnoDB;
+
+CREATE TABLE `file_statement_breakdown` (
+	`file_statement_breakdown_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`file_statement_id` INT(11) NOT NULL,
+	`line_number` INT(11) NOT NULL,
+	`text` VARCHAR(255) NOT NULL,
+	`longest_word` VARCHAR(255) NULL DEFAULT NULL,
+	`smallest_word` VARCHAR(255) NULL DEFAULT NULL,
+	`length` INT(11) NULL DEFAULT NULL,
+	`average_word_length` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`file_statement_breakdown_id`),
+	INDEX `file_statement_id` (`file_statement_id`),
+	CONSTRAINT `file_statement_breakdown_ibfk_1` FOREIGN KEY (`file_statement_id`) REFERENCES `file_statement` (`file_statement_id`)
+)
+CHARSET='utf8'
+ENGINE=InnoDB;
